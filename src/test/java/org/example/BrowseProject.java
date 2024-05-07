@@ -20,6 +20,7 @@ public class BrowseProject {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://jira-auto.codecool.metastage.net/login.jsp");
+        //login
         driver.findElement(By.id("login-form-username")).sendKeys("automation12");
         driver.findElement(By.id("login-form-password")).sendKeys("CCAutoTest19.");
         driver.findElement(By.id("login-form-submit")).click();
@@ -30,6 +31,7 @@ public class BrowseProject {
     @AfterEach
     void tearDown() {
 
+        //logout
         driver.findElement(By.className("aui-avatar-inner")).click();
         driver.findElement(By.id("log_out")).click();
         driver.quit();
@@ -39,13 +41,17 @@ public class BrowseProject {
     @Test
     void testBrowseAllProject() throws InterruptedException {
 
+        //arrange
         driver.findElement(By.id("browse_link")).click();
         Thread.sleep(2000);
         driver.findElement(By.id("project_view_all_link_lnk")).click();
         Thread.sleep(2000);
 
+        //act
         var actualText = driver.findElement(By.className("aui-page-header-main")).getText();
 
+
+        //assert
         Assertions.assertEquals("Browse projects", actualText);
 
     }
@@ -53,6 +59,7 @@ public class BrowseProject {
     @Test
     void testBrowseToucanProject() throws InterruptedException {
 
+        //arrange
         driver.findElement(By.id("browse_link")).click();
         Thread.sleep(2000);
         driver.findElement(By.id("project_view_all_link_lnk")).click();
@@ -60,6 +67,7 @@ public class BrowseProject {
         driver.findElement(By.id("project-filter-text")).sendKeys("Toucan");
         Thread.sleep(2000);
 
+        //assert
         var elementsList = driver.findElements(By.className("cell-type-key"));
         var isAllNamedToucan = false;
 
@@ -68,6 +76,8 @@ public class BrowseProject {
                 isAllNamedToucan = true;
             }
         }
+
+        //assert
         assertTrue(isAllNamedToucan, "TOUCAN project not found!");
 
     }
@@ -75,6 +85,7 @@ public class BrowseProject {
     @Test
     void testBrowseJetiProject() throws InterruptedException {
 
+        //arrange
         driver.findElement(By.id("browse_link")).click();
         Thread.sleep(2000);
         driver.findElement(By.id("project_view_all_link_lnk")).click();
@@ -82,6 +93,7 @@ public class BrowseProject {
         driver.findElement(By.id("project-filter-text")).sendKeys("Jeti");
         Thread.sleep(2000);
 
+        //act
         var elementsList = driver.findElements(By.className("cell-type-key"));
         var isAllNamedJeti = false;
 
@@ -90,6 +102,8 @@ public class BrowseProject {
                 isAllNamedJeti = true;
             }
         }
+
+        //assert
         assertTrue(isAllNamedJeti, "JETI project not found!");
 
     }
@@ -97,6 +111,7 @@ public class BrowseProject {
     @Test
     void testBrowseCoalaProject() throws InterruptedException {
 
+        //arrange
         driver.findElement(By.id("browse_link")).click();
         Thread.sleep(2000);
         driver.findElement(By.id("project_view_all_link_lnk")).click();
@@ -104,6 +119,7 @@ public class BrowseProject {
         driver.findElement(By.id("project-filter-text")).sendKeys("Coala");
         Thread.sleep(2000);
 
+        //act
         var elementsList = driver.findElements(By.className("cell-type-key"));
         var isAllNamedCoala = false;
 
@@ -112,6 +128,8 @@ public class BrowseProject {
                 isAllNamedCoala = true;
             }
         }
+
+        //assert
         assertTrue(isAllNamedCoala, "COALA project not found!");
 
     }
