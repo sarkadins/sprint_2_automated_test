@@ -1,10 +1,12 @@
 package org.example;
 
-import dev.failsafe.internal.util.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +26,9 @@ public class CreateIssue {
     private WebDriverWait wait;
 
     @BeforeEach
-    void setUp(){
+
+    void setUp() {
+
         driver = new ChromeDriver();
         driver.get("https://jira-auto.codecool.metastage.net/");
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -38,15 +42,15 @@ public class CreateIssue {
     @Test
     void testCreateIssueAsToucan() {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"create_link\"]")))
-                        .click();
+                .click();
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#project-field")))
-                        .click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@id='all-projects']/li[6]/a[@role='presentation']")))
-                        .click();
+                .click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html//input[@id='project-field']")))
+                .sendKeys("TOUCAN project (TOUCAN)", Keys.ENTER);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"summary\"]")))
                 .sendKeys("test summary");
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"create-issue-submit\"]")))
-                        .click();
+                .click();
 
         WebElement confirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"aui-flag-container\"]/div/div/a")));
         Assertions.assertTrue(confirmation.isDisplayed());
@@ -62,8 +66,26 @@ public class CreateIssue {
         });
     }
 
+    @Test
+    void testCreateIssueAsCoala() {
+        //COALA project (COALA)
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"create_link\"]")))
+                .click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#project-field")))
+                .click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html//input[@id='project-field']")))
+                .sendKeys("COALA project (COALA)", Keys.ENTER);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"summary\"]")))
+                .sendKeys("test summary");
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"create-issue-submit\"]")))
+                .click();
+
+        WebElement confirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"aui-flag-container\"]/div/div/a")));
+        Assertions.assertTrue(confirmation.isDisplayed());
+    }
+
     @AfterEach
-    void tearDown(){
+    void tearDown() {
 
         driver.quit();
     }
