@@ -48,6 +48,7 @@ public class PermissionWithGlass {
         Assertions.assertEquals("Any logged in user", driver.findElement(By.cssSelector("#project-config-panel-permissions > jira-permissions-table > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.grants > dl > dd"))
                 .getText());
     }
+
     @Test
     void verifyCreateIssuePermission() {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html//a[@id='browse_link']"))).click();
@@ -62,6 +63,22 @@ public class PermissionWithGlass {
         Assertions.assertEquals(expected, actual);
 
     }
+
+    @Test
+    void verifyEditIssuePermission() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html//a[@id='browse_link']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Use It To Practice Project (PP)"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html//section[@id='sidebar']//a[@href='/plugins/servlet/project-config/PP']")))
+                .click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html//a[@id='view_project_permissions']")))
+                .click();
+        WebElement permission = driver.findElement(By.cssSelector(".permissions-group:nth-child(2) tr:nth-child(6) dd"));
+        String actual = permission.getText();
+        String expected = "Any logged in user";
+        Assertions.assertEquals(expected, actual);
+
+    }
+
     @AfterEach
     void tearDown(){
         driver.quit();
