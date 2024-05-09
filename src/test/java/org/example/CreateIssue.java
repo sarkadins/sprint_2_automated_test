@@ -8,38 +8,48 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CreateIssue {
-    WebDriver driver;
+
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     @BeforeEach
-    void setUp() throws InterruptedException {
+    void setUp(){
         driver = new ChromeDriver();
         driver.get("https://jira-auto.codecool.metastage.net/");
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
         driver.findElement(By.cssSelector("#login-form-username")).sendKeys("automation13");
         driver.findElement(By.cssSelector("#login-form-password")).sendKeys("CCAutoTest19.");
         driver.findElement(By.cssSelector("#login")).click();
-        Thread.sleep(1800);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("create_link")));
     }
 
     @Test
-    void testCreateIssueAsToucan() throws InterruptedException {
-        driver.findElement(By.xpath("//*[@id=\"create_link\"]")).click();
-        Thread.sleep(700);
-        driver.findElement(By.cssSelector("#project-field")).click();
-        driver.findElement(By.xpath("//ul[@id='all-projects']/li[6]/a[@role='presentation']")).click();
+    void testCreateIssueAsToucan() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"create_link\"]")))
+                        .click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#project-field")))
+                        .click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@id='all-projects']/li[6]/a[@role='presentation']")))
+                        .click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"summary\"]")))
+                .sendKeys("test summary");
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"create-issue-submit\"]")))
+                        .click();
 
-        Thread.sleep(700);
-        driver.findElement(By.xpath("//*[@id=\"summary\"]")).sendKeys("test summary");
-        Thread.sleep(700);
-        driver.findElement(By.xpath("//*[@id=\"create-issue-submit\"]")).click();
-        Thread.sleep(700);
-        Assertions.assertTrue(driver.findElement(By.xpath("//*[@id=\"aui-flag-container\"]/div/div/a")).isDisplayed());
-        Thread.sleep(1200);
+        WebElement confirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"aui-flag-container\"]/div/div/a")));
+        Assertions.assertTrue(confirmation.isDisplayed());
     }
 
     @Test
