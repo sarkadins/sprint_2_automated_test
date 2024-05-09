@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class VerifyBrowseProjectPermissions {
+public class PermissionWithGlass {
     private WebDriver driver;
     private WebDriverWait wait;
 
