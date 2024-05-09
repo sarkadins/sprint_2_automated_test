@@ -45,8 +45,10 @@ public class PermissionWithGlass {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html//a[@id='view_project_permissions']")))
                 .click();
 
-        Assertions.assertEquals("Any logged in user", driver.findElement(By.cssSelector("#project-config-panel-permissions > jira-permissions-table > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.grants > dl > dd"))
-                .getText());
+        String actualPermissionText = driver.findElement(By.cssSelector("#project-config-panel-permissions > jira-permissions-table > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.grants > dl > dd"))
+                .getText();
+
+        Assertions.assertEquals("Any logged in user", actualPermissionText);
     }
 
     @Test
