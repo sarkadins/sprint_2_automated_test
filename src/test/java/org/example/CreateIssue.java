@@ -7,6 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -19,7 +26,9 @@ public class CreateIssue {
     private WebDriverWait wait;
 
     @BeforeEach
+
     void setUp() {
+
         driver = new ChromeDriver();
         driver.get("https://jira-auto.codecool.metastage.net/");
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
