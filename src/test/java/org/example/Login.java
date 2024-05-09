@@ -43,13 +43,13 @@ void testWrongPassword(){
 @Test
 void testGetCaptchaAfterThreeWrongPassword(){
     driver.get("https://jira-auto.codecool.metastage.net/login.jsp");
-    driver.findElement(By.id("login-form-username")).sendKeys("automation11");
+    driver.findElement(By.id("login-form-username")).sendKeys("automation10");
     driver.findElement(By.id("login-form-password")).sendKeys("wrongPass1");
     driver.findElement(By.id("login-form-submit")).click();
-    driver.findElement(By.id("login-form-username")).sendKeys("automation11");
+    driver.findElement(By.id("login-form-username")).sendKeys("automation10");
     driver.findElement(By.id("login-form-password")).sendKeys("wrongPass2");
     driver.findElement(By.id("login-form-submit")).click();
-    driver.findElement(By.id("login-form-username")).sendKeys("automation11");
+    driver.findElement(By.id("login-form-username")).sendKeys("automation10");
     driver.findElement(By.id("login-form-password")).sendKeys("wrongPass3");
     driver.findElement(By.id("login-form-submit")).click();
     WebElement captchaMessage = driver.findElement(By.className("aui-message-error"));
