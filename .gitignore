@@ -5,7 +5,7 @@ target/
 
 /target/
 /out
-/.idea/
+.idea/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
