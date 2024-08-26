@@ -123,3 +123,11 @@ Checks that the user session is terminated and requires re-authentication for fu
 
 [linkedin-url-two]: https://www.linkedin.com/in/soma-sarkadi-nagy/
 
+[contributors-shield]: https://img.shields.io/github/contributors/sarkadins/sprint_2_automated_test
+[contributors-url]: https://github.com/sarkadins/sprint_2_automated_test/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/sarkadins/sprint_2_automated_test?style=social
+[forks-url]: https://github.com/sarkadins/sprint_2_automated_test/forks
+[stars-shield]: https://img.shields.io/github/stars/sarkadins/sprint_2_automated_test?style=social
+[stars-url]: https://github.com/sarkadins/sprint_2_automated_test/stargazers
+[issues-shield]: https://img.shields.io/github/issues/sarkadins/sprint_2_automated_test
+[issues-url]: https://github.com/sarkadins/sprint_2_automated_test/issues
